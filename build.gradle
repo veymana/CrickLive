@@ -38,10 +38,12 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// Heroku stage task - clean before build, not after!
-task stage(dependsOn: ['clean', 'build']) {
+// Heroku stage task - must use bootJar to create executable JAR
+task stage {
+	dependsOn clean, bootJar
 	doLast {
 		println "=== Application staged for Heroku deployment ==="
+		println "JAR location: build/libs/livecrick.jar"
 	}
 }
 
