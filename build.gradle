@@ -37,3 +37,20 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// Heroku stage task
+task stage(dependsOn: ['build', 'clean']) {
+	doLast {
+		println "=== Application staged for Heroku deployment ==="
+	}
+}
+
+// Configure bootJar for Heroku
+bootJar {
+	enabled = true
+	archiveFileName = 'livecrick.jar'
+}
+
+jar {
+	enabled = false
+}
