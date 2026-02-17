@@ -38,8 +38,8 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// Heroku stage task
-task stage(dependsOn: ['build', 'clean']) {
+// Heroku stage task - clean before build, not after!
+task stage(dependsOn: ['clean', 'build']) {
 	doLast {
 		println "=== Application staged for Heroku deployment ==="
 	}
@@ -49,6 +49,7 @@ task stage(dependsOn: ['build', 'clean']) {
 bootJar {
 	enabled = true
 	archiveFileName = 'livecrick.jar'
+	mainClass = 'com.crick.livecrick.LivecrickApplication'
 }
 
 jar {
